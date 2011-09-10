@@ -20,13 +20,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: docutils.SlackBuild,v 1.1 2011/02/13 08:53:35 gsotirov Exp $
+# $Id: docutils.SlackBuild,v 1.2 2011/09/10 20:13:40 gsotirov Exp $
 #
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 NAME=docutils
-VERSION=0.7
+VERSION=0.8.1
 BUILD=${BUILD:-1}
 ARCH=noarch
 
