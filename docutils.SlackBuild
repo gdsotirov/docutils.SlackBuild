@@ -1,8 +1,7 @@
 #!/bin/sh
 #
-#
 # Slackware build script for docutils
-# Copyright (C) 2011 Georgi D. Sotirov <gdsotirov@dir.bg>
+# Copyright (C) 2011,2013 Georgi D. Sotirov <gdsotirov@dir.bg>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -20,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: docutils.SlackBuild,v 1.2 2011/09/10 20:13:40 gsotirov Exp $
+# $Id: docutils.SlackBuild,v 1.3 2013/03/03 17:28:52 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=docutils
-VERSION=0.8.1
+VERSION=0.10
 BUILD=${BUILD:-1}
 ARCH=noarch
 
