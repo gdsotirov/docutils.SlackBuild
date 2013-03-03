@@ -19,7 +19,7 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: docutils.SlackBuild,v 1.3 2013/03/03 17:28:52 gsotirov Exp $
+# $Id: docutils.SlackBuild,v 1.4 2013/03/03 19:01:02 gsotirov Exp $
 #
 
 . ../../slack-package.conf
@@ -27,7 +27,7 @@
 NAME=docutils
 VERSION=0.10
 BUILD=${BUILD:-1}
-ARCH=noarch
+ARCH=${ARCH:-i486}
 
 TMP=${TMP:-/tmp}
 CWD=${CWD:-`pwd`}
