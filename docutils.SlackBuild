@@ -19,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: docutils.SlackBuild,v 1.5 2016/05/06 13:30:18 gsotirov Exp $
+# $Id: docutils.SlackBuild,v 1.6 2016/12/09 17:28:30 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=docutils
-VERSION=0.12
+VERSION=0.13.1
 BUILD=${BUILD:-1}
 ARCH=${ARCH:-i486}
 
@@ -36,13 +36,13 @@ if [ ! -e $TMP ]; then
   mkdir -p $TMP # location to build the source
 fi
 
-SRC=$TMP/$NAME-$VERSION
+SRC=$TMP/${NAME}-${VERSION}
 if [ -e $SRC -a -d $SRC ]; then
   echo "Source directory '$SRC' already exists! Plaese, move it or remove it."
   exit 1
 fi
 
-PKG=$TMP/package-$NAME
+PKG=$TMP/package-${NAME}
 if [ -e $PKG -a -d $PKG ]; then
   echo "Package creation directory '$PKG' already exists! Please, move it or remove it."
   exit 2
@@ -51,7 +51,7 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -xvf $CWD/$NAME-$VERSION.tar.gz || exit 1
+tar -xvf $CWD/${NAME}-${VERSION}.tar.gz || exit 1
 cd $SRC
 fix_source
 
@@ -60,9 +60,9 @@ python setup.py build || exit 1
 python setup.py install --root=$PKG || exit 2
 
 # Prepare
-DOCFILES="$DOCFILES PKG-INFO BUGS.txt COPYING.txt FAQ.txt HISTORY.txt README.txt RELEASE-NOTES.txt THANKS.txt"
-( cd $SRC; create_docs $PKG $NAME-$VERSION )
-( cd $PKG/usr/doc/$NAME-$VERSION
+DOCFILES="$DOCFILES BUGS.txt COPYING.txt FAQ.txt HISTORY.txt PKG-INFO README.txt RELEASE-NOTES.txt THANKS.txt"
+( cd $SRC; create_docs $PKG ${NAME}-${VERSION} )
+( cd $PKG/usr/doc/${NAME}-${VERSION}
   mv COPYING.txt COPYING
   mv README.txt README )
 
@@ -70,17 +70,18 @@ mkdir -p $PKG/install
 install -m 644 $CWD/slack-desc     $PKG/install/slack-desc
 install -m 644 $CWD/slack-required $PKG/install/slack-required
 
-mkdir -p $PKG/usr/src/slackbuilds/$NAME-$VERSION
-install -m 644 $CWD/slack-desc       $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-desc
-install -m 644 $CWD/slack-required   $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-required
-install -m 644 $CWD/$NAME.SlackBuild $PKG/usr/src/slackbuilds/$NAME-$VERSION/$NAME.SlackBuild
+SBDIR=$PKG/usr/src/slackbuilds/${NAME}-${VERSION}
+mkdir -p $SBDIR
+install -m 644 $CWD/slack-desc         $SBDIR/slack-desc
+install -m 644 $CWD/slack-required     $SBDIR/slack-required
+install -m 644 $CWD/${NAME}.SlackBuild $SBDIR/${NAME}.SlackBuild
 
 cd $PKG
-PKGNAME=$NAME-$VERSION-$ARCH-$BUILD$MYIN
-makepkg -l y -c n $PKG_DIR/$PKGNAME.txz
+PKGNAME=${NAME}-${VERSION}-${ARCH}-${BUILD}${MYIN}
+makepkg -l y -c n $PKG_DIR/${PKGNAME}.txz
 cd $PKG_DIR
-md5sum $PKGNAME.txz > $PKGNAME.txz.md5
-cat $PKG/install/slack-desc > $PKG_DIR/$PKGNAME.txt
+md5sum ${PKGNAME}.txz > $PKGNAME.txz.md5
+cat $PKG/install/slack-desc > $PKG_DIR/${PKGNAME}.txt
 
 if [ "$1" == "--cleanup" ]; then
   rm -r $SRC
